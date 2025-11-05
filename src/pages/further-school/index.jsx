@@ -27,6 +27,7 @@ import TestimonialsCarousel from "@/componentes/ui/TestimonialsCarousel";
 import { WaveToDark, WaveToLight } from "@/componentes/ui/Waves";
 import InstagramWidget from "@/componentes/ui/InstagramWidget";
 import CarouselSchool from "@/componentes/ui/CarouselSchool";
+import HeroSchool from "@/componentes/hero/HeroSchool";
 
 
 
@@ -220,143 +221,163 @@ export default function FurtherSchoolPage({ messages }) {
           className={`${BG_DARK} ${TEXT_DARK} min-h-screen overflow-x-clip`}
         >
           {/* === HERO === */}
-          <section
-            className="relative z-10 overflow-hidden min-h-[90vh] flex items-center justify-center"
-            aria-labelledby="school-hero-title"
-          >
-            {/* Fondo de video con parallax */}
-            <motion.div
-              className="absolute inset-0 -z-10 overflow-hidden"
-              style={{ perspective: 1000 }}
-            >
-              <motion.video
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="none"
-                poster="/images/school-poster.webp"
-                className="absolute inset-0 w-full h-full object-cover brightness-[0.6]"
-                style={{ scale: videoScale, y: videoY }}
-              >
-                <source src="/videos/school-bg.webm" type="video/webm" />
-                <source src="/videos/school-bg.mp4" type="video/mp4" />
-              </motion.video>
-
-              {/* Capa de overlay para contraste */}
-              <div className="absolute inset-0 bg-gradient-to-b from-[#0A1628]/60 via-[#0A1628]/80 to-[#0A1628]/95" />
-            </motion.div>
-
-            {/* Orbes naranjas sutiles */}
-            <div
-              className="pointer-events-none absolute inset-0 -z-[5]"
-              aria-hidden
-            >
-              <div className="absolute -top-28 -right-24 h-72 w-72 rounded-full bg-[#EE7203]/25 blur-3xl" />
-              <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-[#FF3816]/20 blur-3xl" />
-            </div>
-
-            {/* Contenido centrado */}
-            <div className={`${SHELL} relative text-center`}>
-              <motion.div
-                initial="hidden"
-                animate="show"
-                variants={stagger}
-                key="school-hero"
-              >
-                {/* Badge opcional
-                {hero.badge && (
-                  <motion.span
-                    variants={fadeUp}
-                    className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-4 py-1.5 text-sm font-semibold text-white/85 backdrop-blur-sm"
-                  >
-                    <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#EE7203] to-[#FF3816]" />
-                    {hero.badge}
-                  </motion.span>
-                )} */}
-
-                <motion.h1
-                  variants={fadeUp}
-                  id="school-hero-title"
-                  className={`${TITLE_DARK} text-4xl sm:text-5xl lg:text-6xl leading-[1.1]`}
-                >
-                  <span className="block mb-2">{hero.title}</span>
-                  <span className={`${GRAD_TEXT}`}>{hero.subtitle}</span>
-                </motion.h1>
-
-                {sec.funBody && (
-                  <motion.p
-                    variants={fadeUp}
-                    className={`${SUB_DARK} text-lg max-w-xl mx-auto`}
-                  >
-                    {sec.funBody}
-                  </motion.p>
-                )}
-
-                <motion.div
-                  variants={fadeUp}
-                  className="flex flex-wrap justify-center gap-3 pt-2"
-                >
-                  <a href="#exams" className={BTN_PRIMARY}>
-                    {common?.buttons?.requestConsultation || "Solicitar consulta"}
-                  </a>
-                  <a href="#instagram" className={BTN_GHOST}>
-                    {common?.buttons?.watchOverview || "Ver presentación"}
-                  </a>
-                </motion.div>
-              </motion.div>
-            </div>
-          </section>
+          <HeroSchool />
           <WaveDivider from="dark" height={66} flip />
 
-{/* WHY FURTHER */}
 
-          <section id="why" className="relative bg-gradient-to-br from-white via-gray-50 to-white py-20">
-  <div className="absolute inset-0 pointer-events-none">
-    <div className="absolute top-0 left-1/3 h-64 w-64 bg-[#EE7203]/10 blur-3xl rounded-full" />
-    <div className="absolute bottom-0 right-1/4 h-64 w-64 bg-[#FF3816]/10 blur-3xl rounded-full" />
-  </div>
+              {/* WHY FURTHER */}
+<section id="why" className="bg-gradient-to-br from-white via-gray-50 to-white text-gray-900" aria-labelledby="why-title">
+  <div className={`${SHELL} py-20`}>
+    {/* ================= INTRO ================= */}
+    <motion.div
+      initial="hidden"
+      animate="show"
+      variants={stagger}
+      className="max-w-4xl mx-auto text-center mb-20"
+    >
+      <motion.h2
+        id="why-title"
+        variants={fadeUp}
+        className="text-4xl sm:text-5xl font-extrabold mb-5"
+      >
+        <span className="bg-gradient-to-r from-[#EE7203] to-[#FF3816] bg-clip-text text-transparent">
+          {t?.why?.title || "¿Por qué Further?"}
+        </span>
+      </motion.h2>
+      <motion.p
+        variants={fadeUp}
+        className="text-lg text-gray-700 leading-relaxed max-w-3xl mx-auto"
+      >
+        {t?.why?.intro ||
+          "Entendemos el idioma como un componente cultural. Por ello, promovemos un ambiente de constante habla inglesa para que la experiencia de aprendizaje sea completamente natural, enfocada en la comunicación real y la fluidez."}
+      </motion.p>
+    </motion.div>
 
-  <div className={`${SHELL}`}>
-    <motion.div initial="hidden" whileInView="show" variants={stagger}>
-      <h2 className="text-center text-4xl font-extrabold text-gray-900 mb-12">
-        {t?.why?.title || "Why Further?"}
-      </h2>
+    {/* ================= APRENDEMOS JUGANDO ================= */}
+    <motion.div
+      variants={fadeUp}
+      className={`${CARD_LIGHT} p-10 sm:p-14 mb-20 relative overflow-hidden`}
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-[#EE7203]/[0.04] to-[#FF3816]/[0.04]" />
+      <div className="relative z-10 text-center space-y-5">
+        <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
+          {t?.why?.funTitle || "Aprendemos jugando"}
+        </h3>
+        <p className="text-gray-700 text-lg leading-relaxed max-w-3xl mx-auto">
+          {t?.why?.funBody ||
+            "Nuestras clases son todo menos aburridas. Con juegos, actividades, eventos, y material multimedia propio, tu aprendizaje de inglés va a ser dinámico e interesante clase a clase."}
+        </p>
+      </div>
+    </motion.div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {[{
-          icon: <FiSmile />,
-          title: sec.funTitle,
-          desc: sec.funBody
-        },{
-          icon: <FiMapPin />,
-          title: sec.parkTitle,
-          desc: sec.parkBody
-        },{
-          icon: <FiMusic />,
-          title: "Metodología con cultura",
-          desc: sec.cultureBody
-        }].map((f, i) => (
-          <motion.div
-            key={i}
-            variants={fadeIn}
-            whileHover={{ scale: 1.03, rotateX: 5 }}
-            className="group relative overflow-hidden rounded-2xl bg-white shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-500 p-8"
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-[#EE7203]/[0.05] to-[#FF3816]/[0.05] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative flex flex-col gap-4">
-              <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-[#EE7203] to-[#FF3816] text-white text-2xl shadow-lg">
-                {f.icon}
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900">{f.title}</h3>
-              <p className="text-gray-600 leading-relaxed">{f.desc}</p>
-            </div>
-          </motion.div>
-        ))}
+    {/* ================= NUESTROS VALORES (con layout de metodología) ================= */}
+    <section className="bg-white text-gray-900" aria-labelledby="values-title">
+      <div className={`${CARD_LIGHT} p-8 sm:p-12`}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+          {/* Texto */}
+          <div className="flex flex-col justify-center">
+            <p className="text-xs uppercase tracking-widest text-gray-500 mb-2">
+              {t?.why?.valuesKicker || "Nuestros valores"}
+            </p>
+            <h2
+              id="values-title"
+              className="text-2xl sm:text-3xl font-extrabold text-gray-900"
+            >
+              {t?.why?.valuesTitle || "Principios que nos definen"}{" "}
+              <span className={GRAD_TEXT}>
+                {t?.why?.valuesHighlight || "Nuestra esencia"}
+              </span>
+            </h2>
+            <p className="mt-3 text-gray-700">
+              {t?.why?.valuesIntro ||
+                "Creemos en una enseñanza de calidad, comunicativa y moderna, que inspire curiosidad y fomente la comunidad."}
+            </p>
+
+            <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {(t?.why?.values || [
+                "Proyecto 100% inmersivo",
+                "Enfoque comunicacional",
+                "Arista proyectual - lúdica",
+                "Excelencia Académica",
+                "Comunidad",
+              ]).map((tx, i) => (
+                <li key={i} className="flex items-center gap-2 text-gray-900">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#FF3816]" />
+                  <span>{tx}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Imagen o carrusel */}
+          <div className="relative">
+            <CarouselSchool />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ================= SEDES ================= */}
+    <motion.div
+      variants={fadeUp}
+      className="mt-24 text-center"
+    >
+      <h3 className="text-3xl font-extrabold text-gray-900 mb-14">
+        {t?.why?.locationsTitle || "Conocé nuestras sedes"}
+      </h3>
+
+      <div className="grid gap-14 lg:grid-cols-2 max-w-6xl mx-auto">
+        {/* Parque Patricios */}
+        <div className={`${CARD_LIGHT} p-6 sm:p-8`}>
+          <h4 className="text-xl font-bold mb-2 text-gray-900">
+            {t?.why?.locations?.patricios?.title || "Parque Patricios"}
+          </h4>
+          <p className="text-gray-700 mb-4">
+            {t?.why?.locations?.patricios?.body ||
+              "Desde 1997, nuestro instituto te espera en el corazón de Parque Patricios."}
+          </p>
+          <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-md border border-gray-200">
+            <video
+              src={t?.why?.locations?.patricios?.videoSrc || "/videos/school-patricios.mp4"}
+              poster={t?.why?.locations?.patricios?.poster || "/images/school-patricios.webp"}
+              className="w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
+          </div>
+        </div>
+
+        {/* Saavedra */}
+        <div className={`${CARD_LIGHT} p-6 sm:p-8`}>
+          <h4 className="text-xl font-bold mb-2 text-gray-900">
+            {t?.why?.locations?.saavedra?.title || "Saavedra"}
+          </h4>
+          <p className="text-gray-700 mb-4">
+            {t?.why?.locations?.saavedra?.body ||
+              "Ahora encontrá también la #ExperienciaFurther en el norte de Buenos Aires."}
+          </p>
+          <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-md border border-gray-200">
+            <video
+              src={t?.why?.locations?.saavedra?.videoSrc || "/videos/school-saavedra.mp4"}
+              poster={t?.why?.locations?.saavedra?.poster || "/images/school-saavedra.webp"}
+              className="w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
+          </div>
+        </div>
       </div>
     </motion.div>
   </div>
 </section>
+
+
+
+
 <WaveDivider from="dark" height={66}  />
 
 
@@ -420,59 +441,6 @@ export default function FurtherSchoolPage({ messages }) {
     </motion.div>
   </div>
 </section>
-<WaveDivider from="dark" height={80} flip  />
-
-
-          {/* === METODOLOGÍA (blanco) === */}
-<section className="bg-white text-gray-900" aria-labelledby="method-title">
-  <div className={`${SHELL} py-14`}>
-    <div className={`${CARD_LIGHT} p-6 sm:p-10`}>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-        {/* Texto (centrado verticalmente) */}
-        <div className="flex flex-col justify-center">
-          <p className="text-xs uppercase tracking-widest text-gray-500">
-            {t?.sections?.culture?.kicker || "Nuestra metodología"}
-          </p>
-          <h2
-            id="method-title"
-            className="mt-2 text-2xl sm:text-3xl font-extrabold text-gray-900"
-          >
-            {t?.sections?.culture?.title || "Cultura y comunicación real"}{" "}
-            <span className={GRAD_TEXT}>
-              {t?.sections?.culture?.highlight || "Contexto vivo"}
-            </span>
-          </h2>
-          <p className="mt-3 text-gray-700">{sec.cultureBody}</p>
-
-          <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {[
-              t?.sections?.culture?.points?.[0] || "Enfoque conversacional",
-              t?.sections?.culture?.points?.[1] || "Proyectos reales",
-              t?.sections?.culture?.points?.[2] || "Feedback continuo",
-              t?.sections?.culture?.points?.[3] ||
-                "Música y cine como insumos",
-            ].map((tx, i) => (
-              <li key={i} className="flex items-center gap-2 text-gray-900">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#FF3816]" />
-                <span>{tx}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        
-      </div>
-    </div>
-
-    {/* Carrousel de imagenes */}
- <CarouselSchool />
-     
-
-  </div>
-
-</section>
-  <WaveDivider from="dark" height={66}  />
-
 
 
           {/* === TESTIMONIOS (dark) === */}
@@ -503,9 +471,11 @@ export default function FurtherSchoolPage({ messages }) {
       </div>
     )}
   </div>
+  
 </section>
 
-<WaveDivider from="dark" height={80} flip />
+{/* 👇 NUEVO separador para pasar al Instagram light */}
+<WaveDivider from="dark" height={90} flip={true} />
 
           {/* === INSTAGRAM (blanco + CTA) === */}
             

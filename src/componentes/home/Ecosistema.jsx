@@ -132,7 +132,7 @@ export default function Ecosistema () {
              tracking-wide px-6 drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]"
 >
   <span className="block text-white/70">
-    En Further incorporamos tecnología de vanguardia para potenciar tu experiencia
+    {t("ecosystem.closing")}
   </span>
 </motion.p>
 

@@ -1,5 +1,6 @@
 // /componentes/ui/CarouselSchool.jsx
-import { useState } from "react";
+"use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -24,93 +25,64 @@ function normalizeSrc(src) {
 }
 
 export default function CarouselSchool() {
-  const [selected, setSelected] = useState(null);
+  const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [selected, setSelected] = useState(null);
 
-  const duration = 60; // 🔸 velocidad más lenta
+  // Cambio automático cada 3 segundos
+  useEffect(() => {
+    if (paused) return;
+    const timer = setInterval(() => {
+      setIndex((prev) => (prev + 1) % imageFiles.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [paused]);
+
+  const src = normalizeSrc(imageFiles[index]);
 
   return (
-    <div className="mt-10 relative select-none">
-      {/* === Desktop (loop infinito) === */}
-      <div
-        className="hidden sm:block overflow-hidden"
-        onMouseEnter={() => setPaused(true)} // 🧠 pausa al hover
-        onMouseLeave={() => !selected && setPaused(false)} // ▶️ reanuda solo si no hay modal abierto
-      >
+    <div
+      className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-xl border border-gray-200 bg-white"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {/* === Imagen actual === */}
+      <AnimatePresence mode="wait">
         <motion.div
-          className="flex gap-10 w-max"
-          animate={paused ? {} : { x: ["0%", "-50%"] }}
-          transition={{
-            repeat: paused ? 0 : Infinity,
-            duration,
-            ease: "linear",
-          }}
+          key={src}
+          initial={{ opacity: 0, scale: 1.03 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.97 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+          className="absolute inset-0"
         >
-          {[...imageFiles, ...imageFiles].map((file, i) => {
-            const src = normalizeSrc(file);
-            return (
-              <motion.div
-                key={`${file}-${i}`}
-                whileHover={{ scale: 1.05, rotateY: 5 }}
-                transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                className="relative group cursor-pointer"
-                onClick={() => {
-                  setSelected(src);
-                  setPaused(true);
-                }}
-              >
-                <div className="aspect-[4/3] w-[400px] overflow-hidden rounded-2xl shadow-xl">
-                  <Image
-                    src={src}
-                    alt={`Foto ${i + 1}`}
-                    width={400}
-                    height={300}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    // onError={(e) =>
-                    //   (e.currentTarget.src = "/images/placeholder.jpg")
-                    // }
-                  />
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl" />
-                <motion.div
-                  className="absolute bottom-3 left-3 text-white/90 text-sm opacity-0 group-hover:opacity-100 transition-opacity"
-                  initial={{ y: 10, opacity: 0 }}
-                  whileHover={{ y: 0, opacity: 1 }}
-                >
-                  Ver imagen →
-                </motion.div>
-              </motion.div>
-            );
-          })}
+          <Image
+            src={src}
+            alt={`Imagen ${index + 1}`}
+            fill
+            priority={false}
+            className="object-cover cursor-pointer"
+            onClick={() => {
+              setSelected(src);
+              setPaused(true);
+            }}
+          />
         </motion.div>
-      </div>
+      </AnimatePresence>
 
-      {/* === Mobile (scroll táctil manual) === */}
-      <div className="sm:hidden overflow-x-auto flex gap-4 snap-x snap-mandatory px-2 pb-2">
-        {imageFiles.map((file, i) => {
-          const src = normalizeSrc(file);
-          return (
-            <div
-              key={i}
-              className="snap-center flex-shrink-0 w-[85%] rounded-2xl overflow-hidden shadow-md cursor-pointer aspect-[4/3]"
-              onClick={() => {
-                setSelected(src);
-                setPaused(true);
-              }}
-            >
-              <Image
-                src={src}
-                alt={`Foto ${i + 1}`}
-                width={500}
-                height={375}
-                className="object-cover w-full h-full"
-                // onError={(e) =>
-                //   (e.currentTarget.src = "/images/placeholder.jpg")
-                // }
-              />
-            </div>
-          );
-        })}
+      {/* === Indicadores === */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+        {imageFiles.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIndex(i)}
+            className={`h-2 w-2 rounded-full transition-all ${
+              i === index
+                ? "bg-gradient-to-r from-[#EE7203] to-[#FF3816] w-5"
+                : "bg-gray-300 hover:bg-gray-400"
+            }`}
+          />
+        ))}
       </div>
 
       {/* === Modal ampliado === */}
@@ -138,9 +110,6 @@ export default function CarouselSchool() {
                 alt="Vista ampliada"
                 fill
                 className="rounded-2xl shadow-2xl object-cover"
-                // onError={(e) =>
-                //   (e.currentTarget.src = "/images/placeholder.jpg")
-                // }
               />
               <button
                 onClick={() => {

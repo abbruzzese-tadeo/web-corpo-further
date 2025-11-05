@@ -260,10 +260,10 @@ export default function FurthermorePage({ messages }) {
 <section className="relative bg-[#0A1628] text-white py-16 text-center">
   <div className="mx-auto max-w-3xl px-6">
     <h2 className="text-2xl sm:text-3xl font-bold mb-4">
-      {t?.ctaOrder?.title || "Pedí tu juego de cartas Furthermore"}
+      {t?.contact?.title || "Pedí tu juego de cartas Furthermore"}
     </h2>
     <p className="text-white/80 mb-10 text-lg">
-      {t?.ctaOrder?.body ||
+      {t?.contact?.body ||
         "Contactanos por WhatsApp para conseguir tu set de juegos FURTHERMORE y comenzar a aprender inglés jugando."}
     </p>
     <a
@@ -272,7 +272,7 @@ export default function FurthermorePage({ messages }) {
       rel="noopener noreferrer"
       className="inline-flex items-center justify-center gap-3 px-10 py-5 rounded-2xl font-semibold text-lg text-gray-900 bg-white hover:bg-gray-100 active:scale-[.98] transition-all shadow-md hover:shadow-lg"
     >
-      {t?.ctaOrder?.button || "Escribinos por WhatsApp"}
+      {t?.contact?.button || "Escribinos por WhatsApp"}
     </a>
   </div>
 </section>

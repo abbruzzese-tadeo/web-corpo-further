@@ -663,6 +663,7 @@
     "badge": "TEFL Program",
     "title": "TEFL:",
     "subtitle": "Teaching English as a Foreign Language",
+    "subheading": "TEFL Certification in Buenos Aires | Live, Teach, and Start Your Global Career",
     "description": "Ready to travel the world while teaching English? Further offers the complete TEFL Certification program you need. Live, work, and gain invaluable experience in Buenos Aires, consistently ranked among the most vibrant cities in South America.",
     "imageSrc": "/images/bg-tefl.jpeg",
     "imageAlt": "TEFL teacher training classroom"
@@ -759,8 +760,38 @@
     "imageAlt": "Sala de aula de inglês na Further School"
   },
   "why": {
-    "title": "Por que escolher a Further?"
-  },
+  "title": "¿Por qué Further?",
+  "intro": "Entendemos el idioma como un componente cultural. Por ello, promovemos un ambiente de constante habla inglesa para que la experiencia de aprendizaje sea completamente natural, enfocada en la comunicación real y la fluidez.",
+
+  "funTitle": "Aprendemos jugando",
+  "funBody": "Nuestras clases son todo menos aburridas. Con juegos, actividades, eventos, y material multimedia propio, tu aprendizaje de inglés va a ser dinámico e interesante clase a clase.",
+
+  "valuesTitle": "Nuestros valores",
+  "values": [
+    "Proyecto 100% inmersivo",
+    "Enfoque comunicacional",
+    "Arista proyectual - lúdica",
+    "Excelencia Académica",
+    "Comunidad"
+  ],
+
+  "locationsTitle": "Conocé nuestras sedes",
+  "locations": {
+    "patricios": {
+      "title": "Parque Patricios",
+      "body": "Desde 1997, nuestro instituto te espera en el corazón de Parque Patricios.",
+      "videoSrc": "/videos/school-patricios.mp4",
+      "poster": "/images/school-patricios.webp"
+    },
+    "saavedra": {
+      "title": "Saavedra",
+      "body": "Ahora encontrá también la #ExperienciaFurther en el norte de Buenos Aires.",
+      "videoSrc": "/videos/school-saavedra.mp4",
+      "poster": "/images/school-saavedra.webp"
+    }
+  }
+},
+
   "sections": {
     "fun": {
       "title": "Aprendemos brincando",

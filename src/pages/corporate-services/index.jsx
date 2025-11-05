@@ -17,7 +17,7 @@ import { useTranslations } from "next-intl";
 import { FiAward, FiUsers, FiTarget, FiBookOpen  } from "react-icons/fi";
 import Ecosistema from "@/componentes/home/Ecosistema";
 import StatsCorporate from "@/componentes/home/StatsCorporate";
-import HeroCorporate from "@/componentes/corporate/HeroCorporate";
+import HeroCorporate from "@/componentes/hero/HeroCorporate";
 
 /* ==============================
    Design Tokens (dark + light)
@@ -159,6 +159,7 @@ function GridPattern() {
 export default function CorporateIndex({ messages }) {
   const tCorp = messages?.corporate ?? {};
   const tCommon = messages?.common ?? {};
+  const tCta = messages?.tech ?? {};
   const t = useTranslations();
   const statsRaw = t.raw("corporate.stats");
 
@@ -404,15 +405,19 @@ const onSubmit = async (e) => {
       </Head>
 
       <MotionConfig reducedMotion="user">
-        <main className={`${BG} min-h-screen relative overflow-hidden`}>
+        <main className={`min-h-screen relative overflow-hidden`}>
           <FloatingOrbs />
           <GridPattern />
 
           {/* HERO */}
           <HeroCorporate />
-
-      
+        
+        {/* STATS */}
           <StatsCorporate />
+                
+
+        {/* EMPRESAS CARROUSEL */}
+
           {/* SERVICES */}
           <section id="servicios" className="relative py-24">
             <div className={SHELL}>
@@ -434,7 +439,7 @@ const onSubmit = async (e) => {
                 className="grid gap-8 md:grid-cols-3"
                 variants={containerStagger}
                 initial="hidden"
-                whileInView="show"
+                animate="show"
                 viewport={{ once: true, amount: 0.2 }}
               >
                 {services.map((svc) => (

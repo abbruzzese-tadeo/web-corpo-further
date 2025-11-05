@@ -6,6 +6,7 @@ import { motion, MotionConfig, useReducedMotion } from "framer-motion";
 import { useRouter } from "next/router";
 import { loadMessages } from "@/lib/i18n";
 import CarouselInfinitePause from "@/componentes/ui/CarrouselInfinitePause";
+import HeroAcademy from "@/componentes/hero/HeroAcademy";
 
 /* === TOKENS === */
 const BG_DARK = "bg-[#0A1628] text-white";
@@ -100,7 +101,7 @@ export default function AcademyPage({ messages }) {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className={BG_DARK}>
+      <div >
         <Head>
           <title>{metaTitle}</title>
           <meta name="description" content={metaDesc} />
@@ -110,67 +111,13 @@ export default function AcademyPage({ messages }) {
         </Head>
 
         {/* === HERO === */}
-        <header className={`${WRAP} pt-16 sm:pt-24 relative`}>
-          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_20%_40%,#FF5A1F_0%,transparent_70%)] blur-[100px]" />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
-            <motion.div {...fadeUp}>
-              <div className="inline-flex items-center gap-2 border border-white/20 bg-white/10 px-3 py-1.5 rounded-full text-xs text-white/80 mb-4">
-                <span className="h-2 w-2 rounded-full bg-[#FF3816]" />
-                {t("academy.hero.badge")}
-              </div>
-              <h1 className="text-5xl lg:text-6xl font-black tracking-tight leading-tight">
-                <span>{t("academy.hero.title.prefix")}</span>{" "}
-                <span className={`${GRAD_TEXT}`}>
-                  {t("academy.hero.title.highlight")}
-                </span>
-              </h1>
-              <p className="mt-4 text-white/70 text-lg leading-relaxed">
-                {t("academy.hero.description")}
-              </p>
-              <p className="mt-2 text-white font-semibold">
-                {t("academy.hero.sub")}
-              </p>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Link href="#featured" className={CTA_SOLID}>
-                  <span className={`${BRAND_GRAD} absolute inset-0`} />
-                  <span className="relative text-white">
-                    {t("academy.hero.ctaPrimary")}
-                  </span>
-                </Link>
-                <Link href="/about" className="text-white/80 hover:text-white">
-                  {t("academy.hero.ctaSecondary")} →
-                </Link>
-              </div>
-            </motion.div>
+        <HeroAcademy />
 
-            {/* VIDEO */}
-            <motion.div {...fadeUp} transition={{ delay: 0.1 }}>
-              <div className={`${CARD_GLASS} overflow-hidden aspect-video`}>
-                <iframe
-                  className="absolute inset-0 w-full h-full"
-                  src="https://www.youtube.com/embed/Q_mfg5gTuEE"
-                  title="Further Academy Overview"
-                  allowFullScreen
-                />
-              </div>
-            </motion.div>
-          </div>
-        </header>
 
-        <WaveToLight className="-mb-[1px]" />
 
         {/* === TRUST === */}
         <section className="bg-white text-gray-900">
-          <div className={`${WRAP} py-16 text-center`}>
-            <motion.p
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              className="text-sm uppercase tracking-wider font-semibold text-gray-500 mb-10"
-            >
-              {t("academy.trust.title")}
-            </motion.p>
-            <CarouselInfinitePause />
-          </div>
+         
 
           {/* === INTRO === */}
           <motion.section {...fadeUp} className={`${WRAP} py-20`}>

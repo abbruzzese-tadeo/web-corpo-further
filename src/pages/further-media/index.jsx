@@ -208,7 +208,7 @@ export default function FurtherMediaPage({ messages }) {
                     </span>
                   </h1>
                   <p className="mt-4 text-white/80 max-w-2xl">
-                    {t?.meta?.description ||
+                    {t?.hero?.description ||
                       "Bite-sized content with real-world English, pronunciation tips, and themed vocabulary."}
                   </p>
                 </div>

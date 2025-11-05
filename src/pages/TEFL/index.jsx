@@ -118,39 +118,53 @@ const video = t.video ?? {};
   >
     {/* Texto */}
     <motion.div
-      initial="hidden"
-      animate="show"
-      variants={stagger}
-      className="space-y-8"
+  initial="hidden"
+  animate="show"
+  variants={stagger}
+  className="space-y-8"
+>
+  {/* Badge */}
+  <motion.span
+    variants={fadeUp}
+    className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white/85 backdrop-blur-sm"
+  >
+    <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#EE7203] to-[#FF3816]" />
+    TEFL Program
+  </motion.span>
+
+  {/* Título principal */}
+  <motion.h1
+    variants={fadeUp}
+    id="tefl-hero-title"
+    className={`${TITLE_DARK} text-4xl sm:text-5xl lg:text-6xl leading-[1.08]`}
+  >
+    <span className="block">{hero?.title || "TEFL:"}</span>
+    <span className={`${GRAD_TEXT} block`}>
+      {hero?.subtitle || "Teaching English as a Foreign Language"}
+    </span>
+  </motion.h1>
+
+  {/* 🆕 Subtítulo agregado */}
+  {hero?.subheading && (
+    <motion.h2
+      variants={fadeUp}
+      className="text-xl sm:text-2xl font-semibold text-white/90 max-w-2xl"
     >
-      <motion.span
-        variants={fadeUp}
-        className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-sm font-semibold text-white/85 backdrop-blur-sm"
-      >
-        <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#EE7203] to-[#FF3816]" />
-        TEFL Program
-      </motion.span>
+      {hero.subheading}
+    </motion.h2>
+  )}
 
-      <motion.h1
-        variants={fadeUp}
-        id="tefl-hero-title"
-        className={`${TITLE_DARK} text-4xl sm:text-5xl lg:text-6xl leading-[1.08]`}
-      >
-        <span className="block">{hero?.title || "TEFL:"}</span>
-        <span className={`${GRAD_TEXT} block`}>
-          {hero?.subtitle || "Teaching English as a Foreign Language"}
-        </span>
-      </motion.h1>
+  {/* Descripción */}
+  {hero?.description && (
+    <motion.p
+      variants={fadeUp}
+      className={`${SUB_DARK} text-lg max-w-xl`}
+    >
+      {hero.description}
+    </motion.p>
+  )}
+</motion.div>
 
-      {hero?.description && (
-        <motion.p
-          variants={fadeUp}
-          className={`${SUB_DARK} text-lg max-w-xl`}
-        >
-          {hero.description}
-        </motion.p>
-      )}
-    </motion.div>
 
     {/* Imagen */}
     <motion.div
